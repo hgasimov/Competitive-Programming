@@ -1,3 +1,9 @@
+package topcoder;
+
+/**
+ * SRM 598 (DIV 2)
+ * @author huseyngasimov
+ */
 public class ErasingCharacters {
     public static String simulate(String s) {
 	StringBuilder sb = new StringBuilder(s);

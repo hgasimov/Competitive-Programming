@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package topcoder;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- *
+ * SRM 598 (DIV 2) 
  * @author huseyngasimov
  */
 public class BinPackingEasy {
