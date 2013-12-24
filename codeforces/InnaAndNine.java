@@ -3,13 +3,13 @@
  * and open the template in the editor.
  */
 
-//package codeforces;
+package codeforces;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- *
+ * Codeforces Round #220 (Div. 2)
  * @author huseyngasimov
  */
 public class InnaAndNine {
