@@ -7,15 +7,7 @@ import java.util.Scanner;
  * Codeforces Round #222 (Div. 2)
  * @author huseyngasimov
  */
-public class Maze {
-    private static class Point {
-        int x, y;
-        Point(int x1, int y1) {
-            x = x1; 
-            y = y1;
-        }
-    }
-    
+public class Maze {    
     private int n, m;
     private char[][] maze; 
     private boolean[][] marked; 
@@ -42,15 +34,24 @@ public class Maze {
         printMaze((new Maze(maze, n, m, k)).solve(), out);
         
         out.flush();
-
     }
     
     private char[][] solve() {
         marked = new boolean[n][m];
-        Point cur = init();    
-        if (cur == null) return maze;
         
-        DFS(cur.x, cur.y);
+        int x = -1, y = -1;
+        mainLoop:
+        for (int i = 0; i < n; i++)            
+          for (int j = 0; j < m; j++)                
+            if (maze[i][j] == '.') {
+                x = i;
+                y = j;
+                break mainLoop;
+            }
+        
+        if (x >= 0 && y >= 0) // if init is sucessful
+            DFS(x, y);
+        
         return maze;
     }
     
@@ -67,16 +68,7 @@ public class Maze {
             maze[x][y] = 'X';
             total++;
         }
-    }
-    
-    private Point init() {
-        for (int i = 0; i < n; i++)            
-          for (int j = 0; j < m; j++)                
-            if (maze[i][j] == '.') 
-              return new Point(i, j);
-        
-        return null;
-    }    
+    }   
     
     private static void printMaze(char[][] a, PrintWriter out) { 
         for (char[] line: a) {
