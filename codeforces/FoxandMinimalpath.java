@@ -23,8 +23,8 @@ public class FoxandMinimalpath {
             out.println("YYNN\nYYNN");
         }        
         else {
-            int n = 32 - Integer.numberOfLeadingZeros(k); //println(n); // number of layers        
-            int N = (n + 2)*(n + 1)/2 + 1; //println(N); // number of nodes required
+            int n = 32 - Integer.numberOfLeadingZeros(k); // number of layers        
+            int N = (n + 2)*(n + 1)/2 + 1; // number of nodes required
             boolean[][] G = new boolean[N+1][N+1];
 
             connect(G, 1, 3);
@@ -88,10 +88,5 @@ public class FoxandMinimalpath {
     private static void connect(boolean[][] G, int i, int j) {
         G[i][j] = true;
         G[j][i] = true;
-    }
-    
-    private static void printArray(int[] a) { for (int i: a) println(i); }    
-    private static void println(Object o) { System.out.println(o);}
-
-    
+    }    
 }
