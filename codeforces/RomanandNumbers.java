@@ -1,8 +1,6 @@
 package codeforces;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
 
 /*
@@ -10,7 +8,7 @@ import java.util.Scanner;
  * exceeds time limit in the test 10
  */
 public class RomanandNumbers {
-    private static HashSet<Integer> resultHash = new HashSet<Integer>();
+    private static long count = 0;
     private static boolean[] marked;
     private static byte[] perm;
     private static byte[] bn;
@@ -30,7 +28,14 @@ public class RomanandNumbers {
         
         recur(0);
         
-        out.println(resultHash.size());
+        int[] ccnt = new int[10]; // char count in bn
+        for (int i = 0; i < N; i++) ccnt[bn[i]]++;
+        int[] fact = new int[20];
+        fact[0] = 1;
+        for (int i = 1; i < 20; i++) fact[i] = fact[i-1] * i;
+        for (int i = 0; i < 10; i++) count /= fact[ccnt[i]];
+        
+        out.println(count);
         out.flush();
     }
     
@@ -38,8 +43,7 @@ public class RomanandNumbers {
         if (level >= N) {
             long lperm = toLong(perm);
             
-            if (lperm % m == 0)
-                resultHash.add(Arrays.hashCode(perm));
+            if (lperm % m == 0) count++;                
             return;
         }
         
