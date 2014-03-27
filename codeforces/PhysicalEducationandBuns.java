@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 /*
  * Codeforces Round #231 (Div. 2), Problem D
- * Exceeds time limit at the test 23
  */
 public class PhysicalEducationandBuns {
     public static void main(String[] args) {
@@ -29,15 +28,17 @@ public class PhysicalEducationandBuns {
         Arrays.sort(h);
         
         int maxSlope_i = maxSlope(h);
-        System.out.println("maxSlope_i = " + maxSlope_i);
+        int minSlope_i = minSlope(h);
                 
         for (int max = 0; ; max++) {
-            if (max % 1000 == 0) System.out.println("max = " + max);
-            if (h[0] + maxSlope_i * (h[1] + 2*max - h[0]) - h[maxSlope_i] < 0) continue;
+            double minSlopeStep1 = ((double)(h[minSlope_i] + 2*max - h[0]))/minSlope_i;
+            double minSlopeStep2 = ((double)(h[minSlope_i] - h[0]))/minSlope_i;
+            
+            if (h[0] + maxSlope_i * minSlopeStep1 - h[maxSlope_i] < 0
+		&& h[0] + 2*max + maxSlope_i * minSlopeStep2 - h[maxSlope_i] < 0) continue;
             
             main:
             for (int low1st = h[0] - max; low1st <= h[0] + max; low1st++) {
-                //System.out.println("max = " + max);
                 for (int low2nd = h[1] + max; low2nd >= h[1] - max; low2nd--) {
                     int step = low2nd - low1st;
                     if (step < 0) break;
@@ -78,4 +79,21 @@ public class PhysicalEducationandBuns {
         
         return maxSlope_i;
     }
+    
+    private static int minSlope(int[] h) {
+        int minSlope_i = 1;
+        double minSlope = (double)h[1] - (double)h[0];
+        if (minSlope == 0) minSlope = 0.00000001;
+        
+        for (int i = 2; i < h.length; i++) {
+            double slope = (h[i] == h[0]) ? 0.00000001 / i : ((double)h[i] - (double)h[0])/i;
+            if (slope < minSlope) {
+                minSlope_i = i;
+                minSlope = slope;
+            }
+        }
+        
+        return minSlope_i;
+    }
 }
+
